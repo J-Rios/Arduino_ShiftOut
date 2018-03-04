@@ -1,0 +1,16 @@
+{
+	"name": "Arduino_ShiftOut",
+	"keywords": "interface, register, 74hc595, esp32",
+	"description": "Arduino library for easy control serial-in to parallel-out shift registers (i.e. 74hc595) with Mutex-safe for ESP32 FreeRTOS projects.",
+	"authors": {
+		"name": "JRios",
+		"url": "https://github.com/J-Rios"
+	},
+	"repository": {
+		"type": "git",
+		"url": "https://github.com/J-Rios/Arduino_ShiftOut"
+	},	
+	"version": "1.0",
+	"frameworks": "arduino",
+	"platforms": ["atmelavr"]
+}
