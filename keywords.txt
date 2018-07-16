@@ -6,19 +6,19 @@
 # Datatypes (KEYWORD1)
 ###########################################
 
-ShiftOut KEYWORD1
+ShiftOut	KEYWORD1
 
 ###########################################
 # Methods and Functions (KEYWORD2)
 ###########################################
 
-begin KEYWORD2
-digitalWrite KEYWORD2
-actualValue KEYWORD2
-low KEYWORD2
-high KEYWORD2
-toggle KEYWORD2
-lowAll KEYWORD2
-highAll KEYWORD2
-toggleAll KEYWORD2
-test KEYWORD2
+begin	KEYWORD2
+digitalWrite	KEYWORD2
+actualValue	KEYWORD2
+low	KEYWORD2
+high	KEYWORD2
+toggle	KEYWORD2
+lowAll	KEYWORD2
+highAll	KEYWORD2
+toggleAll	KEYWORD2
+test	KEYWORD2
