@@ -19,92 +19,67 @@ ShiftOut<NUM_SHOUT> Shiftout;
 
 void setup()
 {
-	// Initialize Serial and ShiftOut object with corresponding pins
-	Serial.begin(9600);
-	Shiftout.begin(P_SHOUT_LATCH, P_SHOUT_DATA, P_SH_CLK);
+    // Initialize Serial and ShiftOut object with corresponding pins
+    Serial.begin(9600);
+    Shiftout.begin(P_SHOUT_LATCH, P_SHOUT_DATA, P_SH_CLK);
 }
 
 void loop()
 {
-	static char to_write[64];
+    static char to_write[64];
 
-	// Set to HIGH each registers outputs
-	for(int i = 0; i < NUM_SHOUT*8; i++)
-	{
-		Shiftout.digitalWrite(i, HIGH);
+    // Set to HIGH each registers outputs
+    for(int i = 0; i < NUM_SHOUT*8; i++)
+    {
+        Shiftout.digitalWrite(i, HIGH);
 
-		// Check the actual output value and determine serial to print message
-		if(Shiftout.actualValue(i) == HIGH)
-			sprintf(to_write, "Expansion port pin %d with value HIGH", i);
-		else
-			sprintf(to_write, "Expansion port pin %d with value LOW", i);
-		Serial.println(to_write);
+        // Print pin change message
+        sprintf(to_write, "Expansion port pin %d with value HIGH", i);
+        Serial.println(to_write);
 
-		delay(500);
-	}
-	Serial.println();
+        delay(500);
+    }
+    Serial.println();
+
+    // Set to LOW each even registers outputs
+    for(int i = 0; i < NUM_SHOUT*8; i=i+2)
+    {
+        Shiftout.digitalWrite(i, LOW);
+
+        // Print pin change message
+        sprintf(to_write, "Expansion port pin %d with value LOW", i);
+        Serial.println(to_write);
+
+        delay(500);
+    }
+    Serial.println();
 	
-	// Set to LOW each even registers outputs
-	for(int i = 0; i < NUM_SHOUT*8; i=i+2)
-	{
-		Shiftout.digitalWrite(i, LOW);
+    // Toggle each registers outputs
+    for(int i = 0; i < NUM_SHOUT*8; i++)
+    {
+        Shiftout.toggle(i);
 
-		// Check the actual output value and determine serial to print message
-		if(Shiftout.actualValue(i) == HIGH)
-			sprintf(to_write, "Expansion port pin %d with value HIGH", i);
-		else
-			sprintf(to_write, "Expansion port pin %d with value LOW", i);
-		Serial.println(to_write);
+        // Check the actual output value and determine serial to print message
+        if(Shiftout.actualValue(i) == HIGH)
+            sprintf(to_write, "Expansion port pin %d with value HIGH", i);
+        else
+            sprintf(to_write, "Expansion port pin %d with value LOW", i);
+        Serial.println(to_write);
 
-		delay(500);
-	}
-	Serial.println();
-	
-	// Set to LOW each odd registers outputs
-	for(int i = 1; i < NUM_SHOUT*8; i=i+2)
-	{
-		Shiftout.digitalWrite(i, LOW);
+        delay(500);
+    }
+    Serial.println();
 
-		// Check the actual output value and determine serial to print message
-		if(Shiftout.actualValue(i) == HIGH)
-			sprintf(to_write, "Expansion port pin %d with value HIGH", i);
-		else
-			sprintf(to_write, "Expansion port pin %d with value LOW", i);
-		Serial.println(to_write);
+    // Set to LOW each even registers outputs
+    for(int i = 1; i < NUM_SHOUT*8; i=i+2)
+    {
+        Shiftout.digitalWrite(i, LOW);
 
-		delay(500);
-	}
-	Serial.println();
-	
-	// Toggle each registers outputs
-	for(int i = 0; i < NUM_SHOUT*8; i++)
-	{
-		Shiftout.toggle(i);
+        // Print pin change message
+        sprintf(to_write, "Expansion port pin %d with value LOW", i);
+        Serial.println(to_write);
 
-		// Check the actual output value and determine serial to print message
-		if(Shiftout.actualValue(i) == HIGH)
-			sprintf(to_write, "Expansion port pin %d with value HIGH", i);
-		else
-			sprintf(to_write, "Expansion port pin %d with value LOW", i);
-		Serial.println(to_write);
-
-		delay(500);
-	}
-	Serial.println();
-	
-	// Toggle each registers outputs
-	for(int i = 0; i < NUM_SHOUT*8; i++)
-	{
-		Shiftout.toggle(i);
-
-		// Check the actual output value and determine serial to print message
-		if(Shiftout.actualValue(i) == HIGH)
-			sprintf(to_write, "Expansion port pin %d with value HIGH", i);
-		else
-			sprintf(to_write, "Expansion port pin %d with value LOW", i);
-		Serial.println(to_write);
-
-		delay(500);
-	}
-	Serial.println();
+        delay(500);
+    }
+    Serial.println("\n");
 }
